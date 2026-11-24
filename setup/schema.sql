@@ -1,5 +1,0 @@
-CREATE TABLE IF NOT EXISTS auth_attempts (
- id INTEGER PRIMARY KEY CHECK (id = 1),
- window_id INTEGER NOT NULL,
- attempts INTEGER NOT NULL
-);

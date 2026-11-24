@@ -1,0 +1,2 @@
+const localAI=location.hostname==='127.0.0.1'&&location.port==='8765';
+async function localCall(name, audio, options={}){const f=new FormData();f.append('audio',audio,'audio.wav');for(const [k,v] of Object.entries(options))f.append(k,v);const r=await fetch('/api/'+name,{method:'POST',headers:{'X-Mix-Local':'1'},body:f});if(!r.ok){let msg;try{msg=(await r.json()).error}catch{}throw Error(msg||'ローカルAI処理失敗');}return r;}

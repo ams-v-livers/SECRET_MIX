@@ -1,0 +1,2 @@
+importScripts('dsp.js');
+onmessage=({data:{x,sr,key,strength,noise,harmony,model}})=>{try{if(noise){postMessage({stage:'ノイズ抑制'});x=MixDSP.denoise(x,sr,noise)}let original=x;if(strength){postMessage({stage:'音程補正'});x=MixDSP.correct(x,sr,key,strength,0,model)}let h=null;if(harmony){postMessage({stage:'ハモリ生成'});h=MixDSP.correct(original,sr,key,0,harmony,model)}postMessage({x,h},h?[x.buffer,h.buffer]:[x.buffer])}catch(e){postMessage({error:e.message})}};
